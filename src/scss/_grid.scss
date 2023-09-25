@@ -1,0 +1,94 @@
+@use "CONSTANTS" as const;
+
+
+.grid{
+    max-width: const.$desktopMaxWidth;
+    margin-left: auto;
+    margin-right: auto;
+    .grid_items{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        .grid_item{
+            display: flex;
+            flex: 1 1 100%;
+            margin-bottom: const.$spacing;
+            @media screen and (min-width:const.$mobileMaxWidth) {
+                flex: 0 1 calc(50% - 10px);
+                &.one-item{
+                    flex: 1 1 100%;
+                }                
+            }            
+            overflow: hidden;
+            flex-direction: column;
+            .grid_carousel_outer{
+                position: relative;
+                height: 0;
+                padding-top: calc((9/16) * 100%);   // default ratio
+                overflow: hidden;
+                border-radius: 10px;              
+                .grid_carousel{
+                    display: flex;
+                    overflow-x: scroll;
+                    scroll-behavior: smooth;
+                    scroll-snap-type: x mandatory;
+                    position: absolute;
+                    left: 0;
+                    top: 50%;
+                    transform: translateY(-50%);                    
+                    .grid_image{
+                        object-fit: cover;
+                        scroll-snap-align: center;
+                        scroll-snap-stop: always;
+                        min-width: 100%;
+                        width: 100%;
+                    }
+                    &.first~.prev,
+                    &.last~.next{
+                        display: none;
+                    }
+                }  
+                .prev, .next{
+                    position: absolute;
+                    top: 0;
+                    height: 100%;
+                    border: 0;
+                    background: rgba(0,0,0,0.2);
+                    padding: 5px;  
+                    z-index: 10;                  
+                }
+                .prev{
+                    left: 0;
+                }
+                .next{
+                    right: 0;
+                }
+            } 
+            .grid_texts{
+                [data-oembed-type="video"]{
+                    position: relative;
+                    overflow: hidden;
+                    width: 100%;
+                    padding-top: 56.25%;
+                    iframe{
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        bottom: 0;
+                        right: 0;
+                        width: 100%;
+                        height: 100%;                        
+                    }                    
+                }
+            }
+        }
+    }
+}
+
+.grid_carousel::-webkit-scrollbar {
+    display: none;
+}
+.grid_carousel {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}

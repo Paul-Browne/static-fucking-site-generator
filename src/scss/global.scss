@@ -1,0 +1,44 @@
+@use "CONSTANTS" as const;
+
+@use "typography";
+
+@use "promotion"; 
+@use "countdown"; 
+@use "popup"; 
+@use "notification"; 
+@use "subscribe-action-bar";
+@use "text-block";
+@use "hero";
+@use "accordion";
+@use "duo-block";
+@use "slider";
+@use "collection";
+@use "grid";
+
+@use "footer";
+@use "navigation";
+
+html.no-scroll{
+    overflow: hidden;
+}
+
+.slice{
+    margin-bottom: 80px;
+    @media screen and (min-width:const.$mobileMaxWidth) {
+        margin-bottom: 100px;
+    }    
+}
+
+img{
+    vertical-align: middle;
+    max-width: 100%;
+}
+
+.global-padding{
+    padding-left: 15px;
+    padding-right: 15px;
+    .full-width{
+        width: calc(100% + 30px);
+        margin-left: -15px;
+    }    
+}

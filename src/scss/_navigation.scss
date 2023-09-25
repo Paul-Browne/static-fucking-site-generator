@@ -1,0 +1,130 @@
+@use "CONSTANTS" as const;
+
+body>header{
+    height: 80px;
+    nav{
+        display: flex;
+        align-items: center;
+        width: 100%;
+        padding: 20px;
+        padding-right: 80px;
+        background-color: const.$white;
+        z-index: 20;
+        .logo{
+            margin-right: auto;
+            img{
+                min-width: 120px;
+                width: 120px;
+                @media screen and (min-width:const.$tabletMaxWidth) {
+                    width: 138px;
+                }                  
+            }
+        }
+        a{
+            text-decoration: none;
+            padding-right: 20px;
+            color: const.$darkBlue;
+        }
+    }
+
+    nav, .hamburger{
+        position: fixed;
+        height: 80px;
+        transition: margin-top 0.3s;
+        margin-top: -80px;       
+    }
+
+    .hamburger{
+        background-color: const.$darkBlue;
+        right: 20px;
+        width: 40px;
+        border: 0;
+        padding: 11px;
+        z-index: 30;
+        top: 20px;
+        border-radius: 10em;
+        height: 40px;
+        div{
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 18px;
+            width: 18px;
+
+            span{
+                position: relative;
+                left: 0;
+                height: 2px;
+                background: #fff;
+                border-radius: 9px;
+                opacity: 1;
+                width: 100%;
+                transform: rotate(0deg);
+                transition: all .2s;
+                transform-origin: left center;                
+            }
+        }
+        &.active{
+            div{
+                left: 4%;
+                span{
+                    opacity: 0;
+                    &:first-child{
+                        transform: rotate(45deg);
+                        width: 23px;
+                        opacity: 1;
+                    }
+                    &:last-child{
+                        transform: rotate(-45deg);
+                        width: 23px;
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+    }
+    
+    &.reveal{
+        nav, .hamburger{
+            margin-top: 0;
+        }
+        nav{
+            box-shadow: 0 2px 7px 0 rgba(43,48,65,.1);
+        }
+        &.top nav{
+            box-shadow: none;
+        }
+    } 
+
+
+    .menu{
+        display: none;
+        &.active{
+            display: flex;
+            min-height: 100%;
+            padding: 0 20px;
+            width: 400px;
+            flex-direction: column;
+            margin-left: auto;
+            position: fixed;
+            top: 0;
+            right: 0;
+            background: white;
+            z-index: 25;
+            @media screen and (max-width:440px) {
+                width: calc(100% - 40px);
+            }
+        }
+        .item{
+            div{
+                display: flex;
+                flex-direction: column;
+            }
+        }
+        a{
+            text-decoration: none;
+            color: const.$darkBlue;
+        }
+    }    
+}

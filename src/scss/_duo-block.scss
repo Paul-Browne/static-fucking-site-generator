@@ -1,0 +1,41 @@
+@use "CONSTANTS" as const;
+
+.duo-block{
+    max-width: const.$desktopMaxWidth;
+    margin: 0 auto;
+    border-radius: 10px;
+    overflow: hidden;
+    min-height: 50vh;
+    display: flex;
+    flex-direction: column;
+    @media screen and (min-width:const.$mobileMaxWidth) {
+        flex-direction: row;
+    }     
+    justify-content: center;
+
+    .duo-block_image, 
+    .duo-block_texts{
+        background-color: const.$white;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        padding: const.$spacing;
+        flex: 1 1 0%;
+        min-height: 50vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        h1{
+            font-size: 45px;
+            letter-spacing: -2.5px;
+            color: const.$white;
+        }
+    }
+    @media screen and (min-width:const.$mobileMaxWidth) {
+        &.mirror .duo-block_image{
+            order: 2;
+        }
+    }  
+}

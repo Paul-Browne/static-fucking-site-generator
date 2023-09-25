@@ -1,0 +1,58 @@
+@use "CONSTANTS" as const;
+
+.hero{
+    display: flex;
+    flex-direction: column;
+    background-color: const.$lightBlue;
+    @media screen and (min-width:const.$tabletMaxWidth) {
+        flex-direction: row;
+    }     
+    .hero_texts{
+        flex: 1 1;
+        max-width: const.$desktopMaxWidth;
+        padding: 40px 15px;
+        @media screen and (min-width:const.$mobileMaxWidth) {
+            padding: 60px 55px;
+        }         
+        h1{
+            margin: 0;
+            padding: 0 0 10px;
+            letter-spacing: -2px;
+            font-weight: 800;            
+            font-size: 40px;
+            line-height: 45px;
+            @media screen and (min-width:const.$mobileMaxWidth) {
+                font-size: 60px;
+                line-height: 60px;
+            }            
+        }
+    }
+    &.no-background-image{
+        background-color: transparent;
+        max-width: const.$desktopMaxWidth;
+        margin-left: auto;
+        margin-right: auto;
+        .hero_texts{
+            padding: 20px 0 0 0;
+            @media screen and (min-width:const.$tabletMaxWidth) {
+                display: flex;
+                :first-child{
+                    margin-right: const.$spacing;
+                }
+                *{
+                    flex: 1 1 0;
+                }
+            }
+        }
+    }
+    .hero_image{
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        min-height: 250px;
+        flex: 1 1;
+        @media screen and (min-width:const.$mobileMaxWidth) {
+            min-height: 500px;
+        }          
+    }
+}

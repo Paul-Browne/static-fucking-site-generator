@@ -1,0 +1,86 @@
+@use "CONSTANTS" as const;
+
+.countdown{
+    .countdown_title{
+        text-align: center;
+        font-size: 35px;
+        letter-spacing: -1px;
+        @media screen and (min-width:const.$mobileMaxWidth) {
+            font-size: 45px;
+            letter-spacing: -2.5px;
+        }                  
+    }
+    .countdown_timer{
+        display: flex;
+        max-width: const.$mobileMaxWidth;
+        margin: 0 auto;
+        .countdown_unit{
+            display: flex;
+            flex-direction: column;
+            padding: 13px 12px;
+            @media screen and (min-width:const.$mobileMaxWidth) {
+                padding: 40px;
+            }              
+            text-align: center;
+            background-color: const.$black;
+            border-radius: 10px;
+            color: const.$pink;
+            min-width: 78px;
+            width: 23.75%;
+            &:not(:last-child){
+                margin-right: calc(5%/3);
+            }
+            .countdown_digits{
+                font-size: 24px;
+                @media screen and (min-width:const.$mobileMaxWidth) {
+                    font-size: 72px;
+                    line-height: 72px;
+                    letter-spacing: -1px;
+                }                
+                font-weight: 600;
+            }
+            .countdown_label{
+                font-size: 12.5px;
+                @media screen and (min-width:const.$mobileMaxWidth) {
+                    font-size: 20px;
+                }                 
+                color: const.$lightBlue;
+            }
+        }
+    }
+}
+
+html[lang="en"]{
+    .countdown_label.days:before { 
+        content: "day";
+    }
+    .countdown_label.hours:before {
+        content: "hour";
+    }
+    .countdown_label.minutes:before {
+        content: "minute";
+    }
+    .countdown_label.seconds:before {
+        content: "second";
+    }
+    .countdown_label:not(.singular):after{
+            content: "s"
+    } 
+}
+
+html[lang="fi"]{
+    .countdown_label.days:before { 
+        content: "päivää";
+    }
+    .countdown_label.hours:before {
+        content: "tuntia";
+    }
+    .countdown_label.minutes:before {
+        content: "minuuttia";
+    }
+    .countdown_label.seconds:before {
+        content: "sekuntia";
+    }
+}
+
+// Repeat for Finnish, Swedish, etc.
