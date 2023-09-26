@@ -9,6 +9,6 @@ export default (domElement, delay_in_seconds = 5) => {
     setTimeout(()=>{
         domElement.classList.add("visible")
         document.documentElement.classList.add("no-scroll")
-    }, delay_in_seconds * 1000)
+    }, delay_in_seconds * 1000 * 1000)
 
 }

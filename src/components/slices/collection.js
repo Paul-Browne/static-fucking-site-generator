@@ -17,7 +17,7 @@ return `
                     ${richText(title)}
                     ${richText(text)}
                 </div>
-                <img loading="lazy" class="collection_image" src="${image.url}">
+                <img src="${image.url}" class="collection_image">
             </a>
         `
     }).join("")}            

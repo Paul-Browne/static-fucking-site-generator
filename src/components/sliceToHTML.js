@@ -14,6 +14,7 @@ import blog_content from "./slices/blog_content.js"
 import footerItem from "./slices/footer_item.js"
 import navigationItem from "./slices/navigation_item.js"
 import html_embed from "./slices/html_embed.js"
+import horizontal_cards from "./slices/horizontal_cards.js"
 
 const sliceToHTML = ({
     type, slices
@@ -36,7 +37,9 @@ const sliceToHTML = ({
 
             51: anchor_target
         */
-        if(slice_type === "html_embed"){
+        if(slice_type === "horizontal_cards"){
+            return horizontal_cards({items})
+        }else if(slice_type === "html_embed"){
             return html_embed(primary)
         }else if(slice_type === "promotion"){
             return promotion(primary)

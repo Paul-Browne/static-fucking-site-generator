@@ -1,6 +1,7 @@
 @use "CONSTANTS" as const;
 
 .slider{
+    position: relative;
     .slider_slides{
         display: flex;
         overflow-x: scroll;
@@ -48,9 +49,31 @@
                         margin-top: 0;
                     }
                 }
-            }            
-        }
+            }  
+        }        
     }
+    .next-slide{
+        position: absolute;
+        top: 50%;
+        right: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center; 
+        background: transparent;
+        border: 0;
+        padding: 0;
+        transform: translateY(-50%); 
+        background: const.$white;
+        border-radius: 9em;
+        width: 44px;
+        height: 44px; 
+        box-shadow: 0px 0px 12px 3px rgba(0,0,0,.15);
+        cursor: pointer;
+        svg{
+            height: 22px;
+            fill: const.$black;
+        }
+    }    
 }
 
 .slider_slides::-webkit-scrollbar {

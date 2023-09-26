@@ -80,7 +80,7 @@ const blogPages = await client.getAllByType('blog_post', {lang: "*" });
 
     totalBytes += htmlToBeWrittenToDisk.length;
 
-    console.log(`${htmlToBeWrittenToDisk.length/1000}kb rendered: ${url}`);
+    //console.log(`${htmlToBeWrittenToDisk.length/1000}kb rendered: ${url}`);
 })
 
 // const blogPages = await client.getAllByType('blog_post', {lang: "*" });

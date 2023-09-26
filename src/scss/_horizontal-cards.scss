@@ -1,0 +1,130 @@
+@use "CONSTANTS" as const;
+
+.horizontal-cards{
+    display: flex;
+    flex-direction: column;
+    @media screen and (min-width:const.$tabletMaxWidth) {
+        margin-top: -55px;
+        flex-direction: row;
+        justify-content: center;
+    }    
+    .horizontal-card{
+        position: relative;
+        @media screen and (min-width:const.$tabletMaxWidth) {
+            display: flex;
+            flex-direction: column;
+            flex: 1 1 0;
+            margin-right: 15px;
+            max-width: 330px;
+            min-width: 0;   // makes the columns shrink and grow evenly
+        }        
+        border-radius: 10px;
+        margin-top: 55px;
+        background-color: const.$cyan;        
+        &:last-child{
+            margin-right: 0;
+        }
+        .horizontal-card_above-header{
+            margin-top: 0;
+            font-size: 18px;
+            letter-spacing: -.5px;  
+            position: absolute;
+            top: -35px;             
+        }
+        .horizontal-card_image{
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            height: 0;
+            img{
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+            svg{
+                position: absolute;
+                bottom: 20px;
+                left: 20px;
+                fill: #fffe;
+                transform: scale(1.5);
+                clip-path: circle(35%);
+                height: 32px;                   
+            }
+        }
+        .horizontal-card_texts{
+            padding: const.$spacing;
+            display: flex;
+            flex-direction: column;
+            height: 100%;            
+            .horizontal-card_texts_inner{
+                margin-top: auto;
+                .horizontal-card_price_container{
+                    display: flex;
+                    align-items: flex-start;
+                    .horizontal-card_price{
+                        line-height: 32px;
+                        letter-spacing: -0.75px;
+                        font-size: 24px;
+                        color: const.$blue;
+                        margin: 0;
+                        &.has-discount{
+                            color: const.$red;
+                        }
+                    }
+                    .horizontal-card_discount_label{
+                        line-height: 32px;
+                        padding: 0 14px;
+                        font-size: 15px;
+                        border-radius: 10px;
+                        background-color: const.$red;
+                        color: const.$white;
+                        margin-left: auto;
+                    }
+                    .horizontal-card_price_description{
+                        margin: 0;
+                        font-size: 15px;
+                        font-weight: 400;
+                    }
+                }
+                .horizontal-card_original_price{
+                    margin: 0;
+                    font-size: 15px;
+                    font-weight: 400;
+                    color: const.$darkGrey;
+                }
+                .horizontal-card_footer{
+                    margin: 0;
+                    font-size: 15px;
+                    font-weight: 400;
+                    padding-top: 10px;
+                }
+            }
+        }
+        .horizontal-card_status_text{
+            border-radius: 50px;
+            background-color: const.$white;
+            font-size: 15px;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            .horizontal-card_traffic_light{
+                border-radius: 50px;
+                height: 15px;
+                min-width: 15px;                    
+            }
+            strong{
+                padding-left: 10px;
+                line-height: 16px;
+            }
+        }
+        &.is_option{
+            background-color: const.$grey;
+        }
+    }
+}

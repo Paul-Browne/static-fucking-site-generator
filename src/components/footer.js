@@ -13,12 +13,12 @@ const html = data => {
 <footer class="global-padding">
     <div class="social-media-and-app-download">
         <div class="social-links">
-            <a href="${facebook_link.url}"><img loading="lazy" src="/img/facebook.svg"></a>
-            <a href="https://www.instagram.com/skipperi.fi/"><img loading="lazy" src="/img/instagram.svg"></a>
+            <a href="${facebook_link.url}"><img src="/img/facebook.svg"></a>
+            <a href="https://www.instagram.com/skipperi.fi/"><img src="/img/instagram.svg"></a>
         </div>
         <div class="app-download-links">
-            <a href="https://apps.apple.com/app/skipperi/id1501372405"><img loading="lazy" src="/img/download-app-store.svg" width="112""></a>
-            <a href="https://play.google.com/store/apps/details?id=fi.skipperi.app"><img loading="lazy" src="/img/download-play-store.svg" width="112"></a>
+            <a href="https://apps.apple.com/app/skipperi/id1501372405"><img src="/img/download-app-store.svg" width="112""></a>
+            <a href="https://play.google.com/store/apps/details?id=fi.skipperi.app"><img src="/img/download-play-store.svg" width="112"></a>
         </div>
     </div>
     <div class="links">
