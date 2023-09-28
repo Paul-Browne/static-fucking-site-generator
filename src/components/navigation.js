@@ -1,3 +1,4 @@
+import { Linkify } from "./utils.js";
 import sliceToHTML from "./sliceToHTML.js"
 
 const html = (data, lang) => {
@@ -8,17 +9,12 @@ const html = (data, lang) => {
         type: "navigation",
         slices: body
     });
-
     return `
 <header id="navi" class="reveal top">
     <nav>
-        <a class="logo" href="/${lang}"><img src="/img/skipperi-logo-navigation.svg" alt="Skipperi"></a>
+        ${Linkify({lang}, `<img src="/img/skipperi-logo-navigation.svg" alt="Skipperi">`, "logo")}
         <div>
-            ${desktop_menu_bar_items.map(item => {
-                const {url, uid, lang} = item.link;
-                const href = url ? url : `/${lang}/${uid}`;  
-                return `<a href="${href}">${item.title}</a>`
-            }).join("")}
+            ${desktop_menu_bar_items.map(item => Linkify(item.link, item.title)).join("")}
         </div>
         <a href="/app/my-skipperi" target="_blank"><span class="fa fa-user"></span>My Skipperi</a>
     </nav>

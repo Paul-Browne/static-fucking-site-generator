@@ -15,9 +15,10 @@ import footerItem from "./slices/footer_item.js"
 import navigationItem from "./slices/navigation_item.js"
 import html_embed from "./slices/html_embed.js"
 import horizontal_cards from "./slices/horizontal_cards.js"
+import skipperi_hobs from "./slices/skipperi_hobs.js"
 
 const sliceToHTML = ({
-    type, slices
+    type, slices, lang
 }={}) => slices.map(element => {
     const {slice_type, primary, items} = element;
     
@@ -25,22 +26,29 @@ const sliceToHTML = ({
 
         // TODO:
         /*
-            52: skipperi_hobs
-            51: horizontal_cards
             08: banner
+            51: anchor_target eg. fi/fleet#faq
             06: skipperi_p2p_boat_price_calculator
             03: skipperi_p2p_boats
             02: content_section
+            
+            not needed, only used on the test page
             01: alternate_grid
             01: onboarding_
             01: skipperi_fleet_pricing
 
-            51: anchor_target
         */
         if(slice_type === "horizontal_cards"){
-            return horizontal_cards({items})
+            return horizontal_cards({
+                items
+            })
         }else if(slice_type === "html_embed"){
             return html_embed(primary)
+        }else if(slice_type === "skipperi_hobs"){
+            return skipperi_hobs({
+                ...primary,
+                lang
+            })
         }else if(slice_type === "promotion"){
             return promotion(primary)
         }else if(slice_type === "popup"){
@@ -59,7 +67,7 @@ const sliceToHTML = ({
             return countdown(primary)
         }else if(slice_type === "collection"){
             return collection({
-                title: primary.title,
+                ...primary,
                 items
             })        
         }else if(slice_type === "grid"){
@@ -72,22 +80,21 @@ const sliceToHTML = ({
             })              
         }else if(slice_type === "accordion"){
             return accordion({
-                title: primary.title,
+                ...primary,
                 items
             })
         }
     }else if(type === "footer"){
         if(slice_type === "item"){
             return footerItem({
-                title: primary.title, 
+                ...primary, 
                 items
             })
         }
     }else if(type === "navigation"){
         if(slice_type === "item"){
             return navigationItem({
-                title: primary.title,
-                link: primary.link,
+                ...primary,
                 items
             })
         }        

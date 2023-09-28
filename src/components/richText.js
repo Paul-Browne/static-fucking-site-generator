@@ -5,13 +5,13 @@ import * as prismic from '@prismicio/client'
 // }
 
 export default (input, debug) => {
-  // spans with inline "hyperlinks" that reference a Document return null...
+  if(input.length == 0) return "";
 
+  // spans with inline "hyperlinks" that reference a Document return null...
   const refactoredInput = input.map(element => {
     if(element.spans && element.spans.length){
       const newSpans = element.spans.map(span => {
         if(span.type === "hyperlink" && span.data.link_type === "Document"){
-          //data: { link_type: 'Web', url: 'https://www.skipperi.fi/app/academy' }
           span.data = {
             link_type: "Web",
             url: `/${span.data.lang}/${span.data.uid}`
@@ -41,5 +41,5 @@ export default (input, debug) => {
     })
   }
 
-  return output
+  return output ? output : ""
 }

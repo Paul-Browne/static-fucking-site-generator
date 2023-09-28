@@ -13,6 +13,8 @@ XtoCss("src/scss/global.scss", "public/css/styles.css", { maps: true });
 cp("src/fonts", "public/fonts", { recursive: true })
 cp("src/images", "public/img", { recursive: true })
 
+cp("src/favicon", "public", { recursive: true })
+
 await esbuild.build({
   entryPoints: ['src/js/scripts.js'],
   bundle: true,
@@ -21,6 +23,12 @@ await esbuild.build({
   target: ['es6'],
   outfile: 'public/js/scripts.js'
 })
+
+/* ⬆⬆⬆ BUILD ASSETS ⬆⬆⬆ */
+
+
+
+/* ⬇⬇⬇ BUILD PAGES ⬇⬇⬇ */
 
 const writeFileToPublic = async  (html, path) => {
     await mkdir(dirname(path), { recursive: true });
@@ -45,8 +53,8 @@ const navigationJSON = await client.getAllByType('navigation', {lang: "*" });
 const landingPages = await client.getAllByType('landing-page', {lang: "*" });
 //const landingPages = await client.getAllByType('landing-page');
 
-const blogPages = await client.getAllByType('blog_post', {lang: "*" });
-
+//const blogPages = await client.getAllByType('blog_post', {lang: "*" });
+const blogPages = [];
 
 [...landingPages, ...blogPages].map(page => {
     const html = landingPage({
@@ -55,7 +63,8 @@ const blogPages = await client.getAllByType('blog_post', {lang: "*" });
         footer: footer(footerJSON.filter(el => el.lang == page.lang)[0].data),
         body: sliceToHTML({
             type: page.type, // "landing-page"
-            slices: page.data.body
+            slices: page.data.body,
+            lang: page.lang
         })
     });
     const resolvedLinksHTML = html
@@ -74,6 +83,10 @@ const blogPages = await client.getAllByType('blog_post', {lang: "*" });
         htmlToBeWrittenToDisk = minifyHTML(resolvedLinksHTML)
     } catch (error) {
         console.error("error in html in:" + pageName);
+    }
+
+    if(htmlToBeWrittenToDisk.indexOf("elfsight-app") > 0){
+        htmlToBeWrittenToDisk = htmlToBeWrittenToDisk.replace("</body></html>", `<script src="https://static.elfsight.com/platform/platform.js"></script></body></html>`)
     }
 
     writeFileToPublic(htmlToBeWrittenToDisk, url)

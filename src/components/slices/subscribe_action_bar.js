@@ -2,9 +2,9 @@ import { Linkify } from "../utils.js"
 const html = ({
     text,
     url
-}={}) => (url.url && text) ? `
-<div class="subscribe-action-bar full-width">
+}={}) => (url && text) ? `
+<section class="subscribe-action-bar full-width">
     ${Linkify(url, text, "btn")}
-</div>` : ""
+</section>` : ""
 
 export default html

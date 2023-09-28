@@ -38,9 +38,10 @@ body>footer{
         .item{
             display: flex;
             flex-direction: column;
+            color: const.$white;
             strong{
-                color: const.$pink;
                 padding-bottom: 10px;
+                color: const.$pink;
             }
             a{
                 text-decoration: none;

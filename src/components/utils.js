@@ -1,15 +1,15 @@
-const Linkify = (link, text, _classes) => {    
-    const {url, uid, lang} = link;
+const Linkify = (link, text, classes, inlineStyle) => {
+    
+    const {url, uid, target, lang} = link;
+    const href = url ? url : (lang ? `/${lang}/${uid || ""}` : "");
 
-    if(url === "" && typeof uid == "undefined" && typeof lang == "undefined"){
-        //console.log(link, text, _classes)
-    }    
+    if(!text) return "";
 
-    // url might be empty string ""
-    const href = url ? url : ((lang && uid) ? `/${lang}/${uid}` : "");
+    return href ? 
+        `<a ${classes ? `class="${classes}"` : ''} href="${href}" ${inlineStyle ? `style="${inlineStyle}"` : "" } ${target ? `target="${target}"` : "" } >${text}</a>` 
+        :
+        `<span ${classes ? `class="${classes}"` : ''} ${inlineStyle ? `style="${inlineStyle}"` : "" }>${text}</span>`
 
-    // const href = url ? url : `/${lang}/${uid}`;
-    return (href && text) ? `<a ${_classes ? `class="${_classes}"` : ''} href="${href}">${text}</a>` : ""
 }
 
 const uid = (length, s) => {

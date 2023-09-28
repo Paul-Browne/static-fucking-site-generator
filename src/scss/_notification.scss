@@ -1,20 +1,22 @@
 @use "CONSTANTS" as const;
 
 .notification{
-    display: block;
-    color: const.$white;
-    background: linear-gradient(270deg,#41abc2,#419bc2);
-    padding: const.$spacing 40px;
-    @media screen and (min-width:const.$desktopMaxWidth) {
-        padding: const.$spacing calc((100vw - (const.$desktopMaxWidth))/2 + 40px);
-    }        
-    text-decoration: none;
-    font-weight: 400;
-    font-size: 14px;
-    p{
-        margin: 0;
-    }
-    &:hover, &:focus {
+    a{
+        display: block;
+        background: linear-gradient(270deg,#41abc2,#419bc2);
+        padding: const.$spacing 40px;
+        @media screen and (min-width:const.$desktopMaxWidth) {
+            padding: const.$spacing calc((100vw - (const.$desktopMaxWidth))/2 + 40px);
+        }
         color: const.$white;
+        text-decoration: none;
+        font-weight: 400;
+        font-size: 14px;
+        p{
+            margin: 0;
+        }
+        &:hover, &:focus {
+            color: const.$white;
+        }        
     }
 }

@@ -10,14 +10,14 @@ const html = ({
     const id = uid(7, "p");
 
 return `
-<div id="${id}" class="popup">
+<section class="popup" id="${id}" >
     <div class="popup-inner">
         <button class="close">XXX</button>
-        <h1>${richText(title)}</h1>
+        ${richText(title)}
         <div>${richText(text)}</div>        
     </div>
-</div>
-<script>popup(${id}, ${delay_in_seconds})</script>`
+    <script>popup(${id}, ${delay_in_seconds})</script>
+</section>`
 }
 
 export default html

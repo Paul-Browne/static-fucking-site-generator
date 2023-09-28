@@ -27,9 +27,9 @@ return `
             <span class="countdown_digits js-seconds">.</span>
             <span class="countdown_label seconds"></span>
         </div>                        
-    </div>                        
+    </div>
+    <script>countdown(${id}, "${date_time}")</script>                            
 </section>
-<script>countdown(${id}, "${date_time}")</script>
 `}
 
 export default html;
