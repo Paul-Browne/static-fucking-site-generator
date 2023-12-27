@@ -8,9 +8,9 @@ import footer from "./src/components/footer.js";
 import navigation from "./src/components/header.js";
 
 XtoCss("src/scss/global.scss", "public/css/styles.css", { maps: true });
-cp("src/fonts", "public/fonts", { recursive: true })
+// cp("src/fonts", "public/fonts", { recursive: true })
+// cp("src/favicon", "public", { recursive: true })
 cp("src/images", "public/img", { recursive: true })
-cp("src/favicon", "public", { recursive: true })
 
 await esbuild.build({
   entryPoints: ['src/js/scripts.js'],
