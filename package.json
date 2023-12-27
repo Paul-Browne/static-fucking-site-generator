@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "serve": "node --watch serve.js",
-    "build": "nodemon build.js"
+    "build": "nodemon build.js",
+    "build:prod": "node build.js"
   },
   "repository": {
     "type": "git",
