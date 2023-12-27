@@ -1,46 +1,28 @@
 @use "CONSTANTS" as const;
 
-@use "typography";
+@use "header";
+@use "lists";
+@use "table";
+@use "menu";
 
-@use "promotion"; 
-@use "countdown"; 
-@use "popup"; 
-@use "notification"; 
-@use "subscribe-action-bar";
-@use "text-block";
-@use "hero";
-@use "accordion";
-@use "duo-block";
-@use "slider";
-@use "collection";
-@use "grid";
-@use "horizontal-cards";
-@use "skipperi-hobs";
+*,
+*:before,
+*:after{
+    box-sizing: border-box;
+}  
 
-@use "footer";
-@use "navigation";
-
-html.no-scroll{
-    overflow: hidden;
+body{
+    font-family: const.$fontFamilyBrand;
+    margin: 0;
 }
 
-.slice{
-    margin-bottom: 80px;
-    @media screen and (min-width:const.$mobileMaxWidth) {
-        margin-bottom: 100px;
-    }    
+button, .button{
+    padding: 0;
+    border: 0;
+    background: none;
 }
 
 img{
-    vertical-align: middle;
     max-width: 100%;
-}
-
-.global-padding{
-    padding-left: 15px;
-    padding-right: 15px;
-    .full-width{
-        width: calc(100% + 30px);
-        margin-left: -15px;
-    }    
+    vertical-align: middle;
 }

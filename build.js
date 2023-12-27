@@ -3,16 +3,13 @@ import { dirname } from "node:path";
 import XtoCss from "x-to-css";
 import * as esbuild from 'esbuild'
 import { minify } from 'html-minifier'
-import client from "./prismic.js"
-import landingPage from "./src/templates/landing-page.js"
-import sliceToHTML from "./src/components/sliceToHTML.js";
+import HTML from "./src/components/html.js"
 import footer from "./src/components/footer.js";
-import navigation from "./src/components/navigation.js";
+import navigation from "./src/components/header.js";
 
 XtoCss("src/scss/global.scss", "public/css/styles.css", { maps: true });
 cp("src/fonts", "public/fonts", { recursive: true })
 cp("src/images", "public/img", { recursive: true })
-
 cp("src/favicon", "public", { recursive: true })
 
 await esbuild.build({
@@ -47,61 +44,34 @@ const minifyHTML = html => minify(html, {
 const t = Date.now();
 let totalBytes = 0;
 
-const footerJSON = await client.getAllByType('footer', {lang: "*" });
-const navigationJSON = await client.getAllByType('navigation', {lang: "*" });
+const pages = [{
+    url: "index",
+    body: `<h1>Home</h1><h1>Home</h1><h1>Home</h1><h1>Home</h1><h1>Home</h1><h1>Home</h1><h1>Home</h1><h1>Home</h1><h1>Home</h1><h1>Home</h1><h1>Home</h1><h1>Home</h1><h1>Home</h1><h1>Home</h1><h1>Home</h1><h1>Home</h1>`
+}, {
+    url: "about",
+    body: `<h1>About</h1>`
+}, {
+    url: "contact",
+    body: `<h1>Contact</h1>`
+}]
 
-const landingPages = await client.getAllByType('landing-page', {lang: "*" });
-//const landingPages = await client.getAllByType('landing-page');
-
-//const blogPages = await client.getAllByType('blog_post', {lang: "*" });
-const blogPages = [];
-
-[...landingPages, ...blogPages].map(page => {
-    const html = landingPage({
-        lang: page.lang,
-        header: navigation(navigationJSON.filter(el => el.lang == page.lang)[0].data, page.lang),
-        footer: footer(footerJSON.filter(el => el.lang == page.lang)[0].data),
-        body: sliceToHTML({
-            type: page.type, // "landing-page"
-            slices: page.data.body,
-            lang: page.lang
-        })
+pages.map(page => {
+    let html = HTML({
+        lang: "en",
+        header: navigation(),
+        footer: footer(),
+        body: page.body
     });
-    const resolvedLinksHTML = html
-        .replace(/<img src/g, "<img loading='lazy' src")
-        .replace(/https:\/\/www.skipperi.fi/g, "/fi")
-        .replace(/https:\/\/skipperi.fi/g, "/fi")
-        .replace(/https:\/\/www.skipperi.no/g, "/no")
-        .replace(/https:\/\/skipperi.no/g, "/no")       
-        
-    const url = `public/${page.lang}/${page.uid == "front" ? "index" : page.uid}.html`
-        .replace("..html", ".html")
-        .replace(/-{2,}/g, "-");
 
-    let htmlToBeWrittenToDisk = resolvedLinksHTML;
     try {
-        htmlToBeWrittenToDisk = minifyHTML(resolvedLinksHTML)
+        html = minifyHTML(html)
     } catch (error) {
         console.error("error in html in:" + pageName);
-    }
-
-    if(htmlToBeWrittenToDisk.indexOf("elfsight-app") > 0){
-        htmlToBeWrittenToDisk = htmlToBeWrittenToDisk.replace("</body></html>", `<script src="https://static.elfsight.com/platform/platform.js"></script></body></html>`)
-    }
-
-    writeFileToPublic(htmlToBeWrittenToDisk, url)
-
-    totalBytes += htmlToBeWrittenToDisk.length;
-
+    }  
+    writeFileToPublic(html, `public/${page.url}.html`)
+    totalBytes += html.length;
     //console.log(`${htmlToBeWrittenToDisk.length/1000}kb rendered: ${url}`);
 })
 
-// const blogPages = await client.getAllByType('blog_post', {lang: "*" });
-// blogPages.map(page => {
-//     console.log(page)
-//     const html = landingPage({copy: sliceToHTML(page.data.body)});
-//     writeFileToPublic(html, `public/${page.lang}/blog/${page.uid}.html`)
-// })
-
-console.log(`${(Date.now() - t)/1000} seconds to compile ${landingPages.length + blogPages.length} pages.`);
-console.log(`average page size: ${Math.round(totalBytes / (landingPages.length + blogPages.length))/1000}Kb`)
+console.log(`${(Date.now() - t)/1000} seconds to compile ${pages.length} pages.`);
+console.log(`average page size: ${Math.round(totalBytes / pages.length)/1000}Kb`)

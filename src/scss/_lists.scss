@@ -1,0 +1,20 @@
+ol{
+    list-style: decimal;
+    ol{
+        list-style: lower-latin;
+        ol{
+            list-style: lower-roman;
+            ol{
+                list-style: lower-greek;
+            }            
+        }
+    }
+}
+
+ol.reset, 
+ul.reset,
+ol.reset ol,
+ul.reset ul{
+    padding: 0;
+    list-style: none;
+}

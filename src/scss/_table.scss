@@ -1,0 +1,84 @@
+@use "CONSTANTS" as const;
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    text-indent: 0;
+    &.technical{
+        font-family: const.$fontFamilyMonospace;
+    }
+    th,
+    td {
+        padding: .66rem;
+        border-top: 1px solid const.$light-grey;
+    }
+    
+    th {
+        border-top: 0;
+        text-align: left;
+        font-weight: bold;
+    }
+
+    tbody{
+        tr:first-child td{
+            border-top: 0;
+        }
+    }
+    
+    thead {
+        th {
+            border-bottom: 2px solid const.$light-grey;
+        }
+    }
+    
+    tfoot {
+        td {
+            border-top: 2px solid const.$light-grey;
+            font-weight: bold;
+        }
+    } 
+    
+    &.small {
+        th,
+        td {
+            padding: .33rem;
+        }
+    }
+    
+    &.bordered,
+    &.cells {
+        border: 1px solid const.$light-grey;
+    }
+    
+    &.cells {
+        th,
+        td {
+            border-left: 1px solid const.$light-grey;
+        }
+    }
+    
+    &.striped tbody tr:nth-of-type(odd) {
+        background-color: rgba(0, 0, 0, .05);
+    }
+    
+    &.striped {
+        th,
+        td {
+            border: 0;
+        }
+    }
+
+    &.borderless{
+        border: 0;
+        th,td{
+            border: 0;
+        }
+    }
+
+}
+
+
+
+
+

@@ -1,17 +1,3 @@
-const Linkify = (link, text, classes, inlineStyle) => {
-    
-    const {url, uid, target, lang} = link;
-    const href = url ? url : (lang ? `/${lang}/${uid || ""}` : "");
-
-    if(!text) return "";
-
-    return href ? 
-        `<a ${classes ? `class="${classes}"` : ''} href="${href}" ${inlineStyle ? `style="${inlineStyle}"` : "" } ${target ? `target="${target}"` : "" } >${text}</a>` 
-        :
-        `<span ${classes ? `class="${classes}"` : ''} ${inlineStyle ? `style="${inlineStyle}"` : "" }>${text}</span>`
-
-}
-
 const uid = (length, s) => {
     s += Math.random().toString(36).substring(2);
     if(s.length < length){
@@ -20,8 +6,32 @@ const uid = (length, s) => {
     return s.slice(0,length);
 }
 
-export {
-    uid,
-    Linkify
+const listFromJSON = ({
+    items, 
+    type,
+    classes
+}) => {
+    return `<${type} class="${classes}">` + items.map(obj => {
+        if(obj.children){
+            return `<li>
+                <span>${obj.content}</span>
+                ${listFromJSON({
+                    items: obj.children,
+                    type,
+                    classes: "" 
+                })}
+            </li>`
+        }else{
+            if(obj.href){
+                return `<li><a href="${obj.href}">${obj.content}</a></li>`
+            }else{
+                return `<li>${obj.content}</li>`
+            }
+        }
+    }).join("") + `</${type}>`
 }
 
+export {
+    uid,
+    listFromJSON
+}

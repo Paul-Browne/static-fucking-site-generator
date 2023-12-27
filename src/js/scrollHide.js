@@ -1,26 +1,20 @@
 export default navigationCont => {
     if(!navigationCont) return
-
     let previousY = window.scrollY;
-
     window.addEventListener("scroll", () => {
         const currentY = window.scrollY;
-
         if(currentY < previousY){
             // scrolling up
-            navigationCont.classList.add("reveal")
-        }else if(currentY > 80){
+            navigationCont.classList.remove("hide")
+        }else if(currentY > navigationCont.getBoundingClientRect().height){
             // scrolling down
-            navigationCont.classList.remove("reveal")
+            navigationCont.classList.add("hide")
         }
         if(currentY <= 0){
-            navigationCont.classList.add("top")
+            navigationCont.classList.remove("not-top")
         }else{
-            navigationCont.classList.remove("top")
+            navigationCont.classList.add("not-top")
         }        
-
         previousY = currentY;
-
     })      
-
 }

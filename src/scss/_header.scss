@@ -1,0 +1,72 @@
+@use "CONSTANTS" as const;
+
+body>header{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: #fff;    
+    transition: margin-top 0.4s;
+    margin-top: 0;
+    nav{
+        display: flex;
+        align-items: center;
+        width: 100%;
+        padding: 15px;
+        >a:not(.logo){
+            color: const.$black;
+            text-decoration: none;
+            padding: 0 10px;
+            letter-spacing: 0.333px;
+            margin-right: 10px;            
+        }
+        .logo{
+            margin-right: auto;
+            img{
+                height: 40px;
+            }
+        }
+
+    }
+    
+    &.hide{
+        margin-top: -70px;
+    } 
+
+    &.not-top nav{
+        box-shadow: 0 2px 7px 0 rgba(43,48,65,.1);
+    }    
+
+    .menu ~ .side-menu{
+        display: flex;
+        position: fixed;
+        top: 70px;
+        left: 0;
+        margin: 0;
+        height: calc(100% - 70px);
+        width: 100%;
+        transition: 0.4s background-color;
+        background-color: rgba(0,0,0,0);
+        justify-content: flex-end;
+        pointer-events: none;
+        >li{
+            transition: 0.4s transform;
+            background-color: #fff;
+            transform: translateX(100%);
+            overflow: scroll;
+            padding: 20px;
+        }
+    }
+
+    +*{
+        padding-top: 70px;
+    }
+}
+
+.menu-open .menu ~  .side-menu{
+    background-color: rgba(0,0,0,0.3);
+    backdrop-filter: blur(6px);
+    pointer-events: all;
+    >li{
+        transform: translateX(0);
+    }
+} 
