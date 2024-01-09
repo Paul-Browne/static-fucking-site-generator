@@ -24,7 +24,6 @@ await esbuild.build({
 /* ⬆⬆⬆ BUILD ASSETS ⬆⬆⬆ */
 
 
-
 /* ⬇⬇⬇ BUILD PAGES ⬇⬇⬇ */
 
 const writeFileToPublic = async  (html, path) => {
